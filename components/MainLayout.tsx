@@ -11,10 +11,11 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-
 import { Button } from "./ui/button";
+import Link from "next/link";
+import { PlusIcon } from "@radix-ui/react-icons";
+
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -49,9 +50,25 @@ export default async function MainLayout(
           <div className=" container flex justify-between">
             <div>
 
-
             </div>
-            <div>
+            <div className=" flex">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant={'outline'} className=" mr-4 gap-2 rounded hover:bg-gray-300 hover:text-black"><PlusIcon />Create</Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="end">
+                  <Link href={'/admin/project/crete'}>
+                    <DropdownMenuItem>
+                      Project
+                    </DropdownMenuItem>
+                  </Link>
+                  <Link href={'/admin/blog/create'}>
+                    <DropdownMenuItem>
+                      Blog
+                    </DropdownMenuItem>
+                  </Link>
+                </DropdownMenuContent >
+              </DropdownMenu>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Avatar className=" cursor-pointer">
@@ -59,15 +76,6 @@ export default async function MainLayout(
                     <AvatarFallback>{user?.email && user.email[0]} </AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56 " align="end">
-                  <DropdownMenuItem>
-                    {user.email}
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    Log out
-                    <DropdownMenuShortcut >⇧⌘Q</DropdownMenuShortcut>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
               </DropdownMenu>
             </div>
           </div>
